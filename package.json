@@ -1,0 +1,22 @@
+{
+  "name": "oas-auth",
+  "version": "0.0.1",
+  "description": "Security handlers to expand OAS Security functionality towards authentication.",
+  "exports": {
+    "./handlers": "./handlers/index.js",
+    "./middleware": "./middleware/index.js"
+  },
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "accesscontrol": "^2.2.1",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21",
+    "oas-devtools": "^0.1.1"
+  }
+}
