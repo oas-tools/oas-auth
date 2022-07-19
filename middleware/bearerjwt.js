@@ -19,7 +19,7 @@ export class OASBearerJWT extends OASBase {
     const anonymous = {};
     Object.entries(oasFile.paths)
       .filter(([_path, opObj]) => opObj.get && !opObj.get.parameters)
-      .forEach(([path, _opObj]) => anonymous[path] = {"read:any" : ["*"]});
+      .forEach(([path, _opObj]) => anonymous[path] = {"read:any": ["*"]});
     
     // Initialize access control
     const accessControls = Object.entries(secSchemes)
@@ -38,7 +38,7 @@ export class OASBearerJWT extends OASBase {
         // Normalize grants object to match express routes
         if (!grantObj.anonymous) grantObj.anonymous = anonymous;
         Object.entries(grantObj).forEach(([role, permissionObj]) => {
-          let newPermissionObj = {};
+          const newPermissionObj = {};
           Object.entries(permissionObj).forEach(([resource, perms]) => {
             let newResourceName = resource.replace(/{/g,':').replace(/}/g, '');
             if (!newResourceName.startsWith('/')) newResourceName = `/${newResourceName}`;
@@ -46,7 +46,7 @@ export class OASBearerJWT extends OASBase {
           });
           grantObj[role] = newPermissionObj;
         })
-        return {[secName] : new AccessControl(grantObj)}
+        return {[secName]: new AccessControl(grantObj)}
       })[0];
 
     /* Instanciate middleware */
@@ -58,8 +58,8 @@ export class OASBearerJWT extends OASBase {
         /* Logical OR */
         await Promise.any(secReqs
           .filter((secReq) => {
-            const secDefs = Object.keys(secReq).map(secName => secSchemes[secName]);
-            return secDefs.some(secDef => {
+            const secDefs = Object.keys(secReq).map((secName) => secSchemes[secName]);
+            return secDefs.some((secDef) => {
 
               return (
                 secDef.type === "http" && req.headers.authorization ||
@@ -91,10 +91,10 @@ export class OASBearerJWT extends OASBase {
                 /* Check permissions for each param in request */
                 if(res.locals.oas.params && Object.keys(res.locals.oas.params).length > 0) {
                   allowed = Object.entries(res.locals.oas.params).every(([paramName, paramValue]) => {
-                    let paramDef = oasRequest.parameters.find(p => p.name === paramName);
-                    let tokenParam = decoded[paramDef['x-acl-binding'] ?? paramName];
+                    const paramDef = oasRequest.parameters.find((p) => p.name === paramName);
+                    const tokenParam = decoded[paramDef['x-acl-binding'] ?? paramName];
+                    const ownership = Array.isArray(tokenParam) && tokenParam.includes(paramValue) || tokenParam === paramValue; 
                     let permission = ac.can(role)[`${action}Any`](req.route.path);
-                    let ownership = Array.isArray(tokenParam) && tokenParam.includes(paramValue) || tokenParam === paramValue; 
                     
                     if (!permission.granted && !tokenParam) logger.warn(`Missing atribute ${paramDef['x-acl-binding'] ?? paramName} in JWT.`);
                     if (!permission.granted && ownership) permission = ac.can(role)[`${action}Own`](req.route.path);
@@ -115,7 +115,7 @@ export class OASBearerJWT extends OASBase {
             }
   
           }));
-        })).catch(err => {
+        })).catch((err) => {
           next(err.errors[0]);
         });
       }

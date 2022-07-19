@@ -8,7 +8,8 @@
   },
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint handlers middleware --ext .mjs --ext .js --ext .cjs",
+    "format": "npm run lint -- --fix"
   },
   "keywords": [],
   "author": "",
@@ -18,5 +19,8 @@
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
     "oas-devtools": "^0.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.20.0"
   }
 }

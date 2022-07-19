@@ -9,8 +9,8 @@ export function bearerJwt(config) {
   if (typeof config !== 'object') { 
     throw new ConfigError("Invalid security config");
   }
-  if (['issuer', 'secret'].some(k => !Object.keys(config).includes(k))) {
-    throw new ConfigError(`Missing ${['issuer', 'secret'].filter(k => !Object.keys(config).includes(k))} in security config`);
+  if (['issuer', 'secret'].some((k) => !Object.keys(config).includes(k))) {
+    throw new ConfigError(`Missing ${['issuer', 'secret'].filter((k) => !Object.keys(config).includes(k))} in security config`);
   }
 
   /* Validate function for OASSecurity middleware */
@@ -24,11 +24,3 @@ export function bearerJwt(config) {
     }
   }
 }
-
-/* CONFIG OBJ
-
-  issuer-------> JWT issuer
-  secret-------> JWT Secret
-  algorithms---> List of algorithms
-
-*/
