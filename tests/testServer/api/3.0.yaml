@@ -1,0 +1,42 @@
+openapi: 3.0.0
+info:
+  version: 0.1.0
+  title: Test server
+  description: Server for OAS-Tools Testing
+paths:
+  # OAS BEARERJWT TEST ENDPOINTS
+  /api/v1/bearerjwt:
+    get:
+      security:
+        - bearerjwt: []
+        - alwaysSuccess: []
+      responses:
+        '200': {$ref: 'subschemas/responses.yaml#/200'}
+        '403': {$ref: 'subschemas/responses.yaml#/403'}
+
+  # OAS BEARERJWT TEST ENDPOINTS
+  /api/v1/bearerjwt/{param}:
+    get:
+      parameters:
+        - name: param
+          in: path
+          required: true
+          x-acl-binding: paramBinding
+          schema:
+            type: integer
+      security:
+        - bearerjwt: []
+      responses:
+        '200': {$ref: 'subschemas/responses.yaml#/200'}
+        '403': {$ref: 'subschemas/responses.yaml#/403'}
+
+components:
+  securitySchemes:
+    alwaysSuccess:
+      name: alwaysSuccess
+      type: apiKey
+      in: header
+    bearerjwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

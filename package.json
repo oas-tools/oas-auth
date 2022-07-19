@@ -6,14 +6,20 @@
     "./handlers": "./handlers/index.js",
     "./middleware": "./middleware/index.js"
   },
+  "files": [
+    "handlers",
+    "middleware"
+  ],
   "type": "module",
   "scripts": {
     "lint": "eslint handlers middleware --ext .mjs --ext .js --ext .cjs",
-    "format": "npm run lint -- --fix"
+    "format": "npm run lint -- --fix",
+    "test": "mocha ./tests/index.test.js --experimental-specifier-resolution=node",
+    "cov": "c8 --all --reporter=lcov --reporter=text npm run test"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "ISA Group, University of Seville",
+  "license": "Apache-2.0",
   "dependencies": {
     "accesscontrol": "^2.2.1",
     "jsonwebtoken": "^8.5.1",
@@ -21,6 +27,12 @@
     "oas-devtools": "^0.1.1"
   },
   "devDependencies": {
-    "eslint": "^8.20.0"
+    "axios": "^0.27.2",
+    "c8": "^7.12.0",
+    "eslint": "^8.20.0",
+    "express": "^4.18.1",
+    "mocha": "^10.0.0",
+    "oas-tools": "^2.2.2",
+    "sinon": "^14.0.0"
   }
 }

@@ -1,0 +1,10 @@
+{
+    "user" : {
+        "api/v1/bearerjwt": {
+            "read:any" : ["*"]
+        },
+        "api/v1/bearerjwt/{param}": {
+            "read:own" : ["*"]
+        }
+    }
+}
