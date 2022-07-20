@@ -137,12 +137,12 @@ If the JWT payload contains a different attribute for `parameter`, you may bind 
 ```yaml
 ...
 parameters:
-	- name: parameter
-	  required: true
-      in: path
-      schema:
-      	type: integer
-      x-acl-binding: JWTParamAttribute
+  - name: parameter
+    required: true
+    in: path
+    schema:
+      type: integer
+    x-acl-binding: JWTParamAttribute
 ...
 ```
 
@@ -152,12 +152,12 @@ Finally, in case no `role` is specified in the JWT payload, the middleware will 
 The following chart shows which versions of NodeJS are compatible with each of the contents inside this package.
 
 <table>
-	<tr width="100%">
-    	<th width="60%">NodeJS compatibility</th>
-        <th width="10%">≤ v12</th>
-        <th width="10%">v14</th>
-        <th width="10%">v16</th>
-        <th width="10%">v18</th>
+	<tr>
+    	<th>NodeJS compatibility</th>
+        <th>≤ v12</th>
+        <th>v14</th>
+        <th>v16</th>
+        <th>v18</th>
     </tr>
     <tr>
     	<td>BearerJWT Handler</td>
