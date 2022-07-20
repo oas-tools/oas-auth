@@ -14,7 +14,7 @@
   "scripts": {
     "lint": "eslint handlers middleware --ext .mjs --ext .js --ext .cjs",
     "format": "npm run lint -- --fix",
-    "test": "mocha ./tests/index.test.js --experimental-specifier-resolution=node",
+    "test": "mocha ./tests/index.test.js",
     "cov": "c8 --all --reporter=lcov --reporter=text npm run test"
   },
   "keywords": [],
