@@ -1,5 +1,4 @@
-import { errors, logger } from "oas-devtools/utils";
-import { OASBase } from "oas-devtools/middleware";
+import { OASBase, errors, logger } from "@oas-tools/commons";
 import { AccessControl } from "accesscontrol";
 import jwt from "jsonwebtoken";
 import fs from "fs";

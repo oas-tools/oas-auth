@@ -1,4 +1,4 @@
-import { errors } from "oas-devtools/utils";
+import { errors } from "@oas-tools/commons";
 import jwt from 'jsonwebtoken';
 
 const { SecurityError, ConfigError } = errors;

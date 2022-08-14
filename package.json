@@ -1,6 +1,5 @@
 {
-  "name": "oas-auth",
-  "version": "0.0.1",
+  "name": "@oas-tools/auth",
   "description": "Security handlers to expand OAS Security functionality towards authentication.",
   "exports": {
     "./handlers": "./handlers/index.js",
@@ -17,22 +16,33 @@
     "test": "mocha ./tests/index.test.js",
     "cov": "c8 --all --reporter=lcov --reporter=text npm run test"
   },
-  "keywords": [],
+  "keywords": [
+    "oas-tools",
+    "OAS",
+    "Tools",
+    "Authentication",
+    "Security",
+    "JWT",
+    "Auth"
+  ],
   "author": "ISA Group, University of Seville",
   "license": "Apache-2.0",
+  "engines": {
+    "node": ">=14.0.0"
+  },
   "dependencies": {
+    "@oas-tools/commons": "^1.0.0",
     "accesscontrol": "^2.2.1",
     "jsonwebtoken": "^8.5.1",
-    "lodash": "^4.17.21",
-    "oas-devtools": "^0.1.1"
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
+    "@oas-tools/core": "^3.0.0",
     "axios": "^0.27.2",
     "c8": "^7.12.0",
     "eslint": "^8.20.0",
     "express": "^4.18.1",
     "mocha": "^10.0.0",
-    "oas-tools": "^2.2.2",
     "sinon": "^14.0.0"
   }
 }

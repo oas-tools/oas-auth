@@ -9,7 +9,7 @@ var app = express();
 
 // Only for testing
 let defaults = JSON.parse(fs.readFileSync('tests/testServer/.oastoolsrc'));
-let {use, initialize} = await importFresh('../../node_modules/oas-tools/src/index.js');
+let {use, initialize} = await importFresh('../../node_modules/@oas-tools/core/src/entrypoint.cjs');
 
 export {use};
 export async function init(config) {
@@ -29,7 +29,7 @@ export function close() {
 }
 
 async function clearCache() {
-  let mod = await importFresh('../../node_modules/oas-tools/src/index.js');
+  let mod = await importFresh('../../node_modules/@oas-tools/core/src/index.js');
   initialize = mod.initialize;
   use = mod.use;
 }

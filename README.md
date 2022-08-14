@@ -2,11 +2,11 @@
 
 <div align="center">
 
-[![NPM](https://nodei.co/npm/oas-auth.png?compact=true)](https://nodei.co/npm/oas-auth/)
+[![NPM](https://nodei.co/npm/@oas-tools/auth.png?compact=true)](https://nodei.co/npm/@oas-tools/auth)
 
-![npm](https://img.shields.io/npm/v/oas-auth)
-![node-current](https://img.shields.io/node/v/oas-auth)
-![npm](https://img.shields.io/npm/dw/oas-auth)
+![npm](https://img.shields.io/npm/v/@oas-tools/auth)
+![node-current](https://img.shields.io/node/v/@oas-tools/auth)
+![npm](https://img.shields.io/npm/dw/@oas-tools/auth)
 [![Node.js CI](https://github.com/oas-tools/oas-tools/actions/workflows/nodejs.yaml/badge.svg)](https://github.com/oas-tools/oas-auth/actions/workflows/nodejs.yaml)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-green.svg)](https://conventionalcommits.org)
 <br/>
