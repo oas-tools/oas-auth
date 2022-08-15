@@ -1,0 +1,9 @@
+errorModel:
+  type: object
+  properties:
+    code:
+      type: integer
+    message:
+      type: string
+stringResponse:
+  type: string
