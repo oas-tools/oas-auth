@@ -1,4 +1,8 @@
-# 1.0.0 (2022-08-15)
+## [1.0.1](https://github.com/oas-tools/oas-auth/compare/v1.0.0...v1.0.1) (2022-09-25)
+
+
+
+# [1.0.0](https://github.com/oas-tools/oas-auth/compare/3382fa2dbf511995d6bae3042e61a6ff0ab51d52...v1.0.0) (2022-08-15)
 
 
 ### Bug Fixes
