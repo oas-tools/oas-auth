@@ -89,17 +89,30 @@ export class OASBearerJWT extends OASBase {
                 
                 /* Check permissions for each param in request */
                 if(res.locals.oas.params && Object.keys(res.locals.oas.params).length > 0) {
-                  allowed = Object.entries(res.locals.oas.params).every(([paramName, paramValue]) => {
+                  allowed = await Promise.all(Object.entries(res.locals.oas.params).map(async ([paramName, paramValue]) => {
                     const paramDef = oasRequest.parameters.find((p) => p.name === paramName);
-                    const tokenParam = decoded[paramDef['x-acl-binding'] ?? paramName];
-                    const ownership = Array.isArray(tokenParam) && tokenParam.includes(paramValue) || tokenParam === paramValue; 
                     let permission = ac.can(role)[`${action}Any`](req.route.path);
                     
-                    if (!permission.granted && !tokenParam) logger.warn(`Missing atribute ${paramDef['x-acl-binding'] ?? paramName} in JWT.`);
+                    let ownership = false;
+
+                    if (config.checkOwnership) { /* Checks ownership from external function */
+                      ownership = await config.checkOwnership(decoded, paramDef['x-acl-binding'] ?? paramName, paramValue);
+                    } else { /* Checks ownership from attributes in token */
+                      const tokenParam = decoded[paramDef['x-acl-binding'] ?? paramName];
+                      ownership = Array.isArray(tokenParam) && tokenParam.includes(paramValue) || tokenParam === paramValue; 
+                      if (!permission.granted && !tokenParam) logger.warn(`Missing atribute ${paramDef['x-acl-binding'] ?? paramName} in JWT.`);
+                    }
+
                     if (!permission.granted && ownership) permission = ac.can(role)[`${action}Own`](req.route.path);
 
                     return permission.granted;
+                  }))
+                  .then((results) => results.every((r) => r === true))
+                  .catch((err) => {
+                    logger.error("Unknown error while checking permissions", err); 
+                    return false; 
                   });
+
                 } else {
                   allowed = ac.can(role)[`${action}Any`](req.route.path).granted;
                 }
