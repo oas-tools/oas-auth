@@ -87,6 +87,7 @@ The configuration object can be provided through the `use` function like shown i
 |`roleBinding`			 | `String`            | Binds `role` to another attribute of the JWT		 |
 | `acl`      			 | `Object`            | Access control configuration      	        		 |
 | `acl.[schemeName]` 	 | `Object` or `String`| Permission declaration. Can be object or a file path|
+| `checkOwnership`    | `Function`           | Function that checks wether some resource is owned or not by the client |
 
 
 #### setting permission
@@ -147,6 +148,17 @@ parameters:
 ```
 
 Finally, in case no `role` is specified in the JWT payload, the middleware will assume an `anonymous` role that only has read access to those operations that doesn't include parameters of any type. This role can be overriden by configuration.
+
+#### Checking ownership
+The middleware can be configured to check wether a resource is owned by the client or not. This is done by providing a function that receives the JWT payload and the parameters name and value, to retur a boolean value. The function must be provided through `config.checkOwnership`
+
+```javascript
+    authCfg.checkOwnership = async (decoded, paramName, paramValue) => {
+      return await Actor.findOne({ [paramName]: paramValue }).then(actor => actor?.email === decoded?.email);
+    }
+```
+
+> **NOTE**: Bear in mind that the function MUST return a boolean value. Promises are suported, but you will need to wait for them to resolve by using `await` or `.then()`. If you don't return a boolean value, the middleware will assume that the resource is not owned by the client and will return `403 Forbidden`.
 
 ## Compatibility chart
 The following chart shows which versions of NodeJS are compatible with each of the contents inside this package.
